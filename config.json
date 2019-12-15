@@ -2,7 +2,8 @@
   "server": {
     "PORT": 3500
   },
-  "dataBaseNames" : {
+  "databaseName" : "Db",
+  "collectionName" : {
     "tasks": "tasks"
   }
 }
