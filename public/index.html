@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>No Title</title>
+    <script src="https://code.angularjs.org/1.6.9/angular.js"></script>
+    <script src="./app.js"></script>
+</head>
+
+<body>
+<div ng-app="app" ng-controller="appController">
+
+    Tutorial Name : <input type="text" ng-model="tutorialName"><br>
+
+    This tutorial is {{tutorialName}}
+
+            <button type="button" class="btn btn-default" ng-click="post()">post</button>
+            <button type="button" class="btn btn-default" ng-click="get()">get</button>
+            <button type="button" class="btn btn-default" ng-click="put()">put</button>
+            <button type="button" class="btn btn-default" ng-click="delete()">delete</button>
+</div>
+</body>
+</html>
