@@ -4,49 +4,34 @@
     function apiService($http) {
 
         var URL = 'http://localhost:3500/',
-            TASK = 'task',
-            OPEN = "open",
-            quadrant = {
-                U_I: 1,
-                U_NI: 3,
-                NU_I: 2,
-                NU_NI: 4
-            };
+            TASK = 'task';
 
         function addTask(taskObject) {
-            return $http.post(URL + TASK, taskObject);
+            // return $http.post(URL + TASK, taskObject);
+            return $http.post(URL + TASK);
         }
 
-        function getAllTask() {
+        function getTask() {
             return $http.get(URL + TASK)
         }
 
-        function updateTaskQuadrant(taskId, quadrant) {
-            let dataToUpdate = {
-                "quadrant": quadrant,
-                "status": "inprogress"
-            };
-
-            return $http.put(URL + TASK + "?searchBy=ObjectId&searchParam=" + taskId, dataToUpdate);
-        }
-
-        function updateTaskStatus(taskId, status) {
+        function updateTask(taskId, status) {
             let dataToUpdate = {
                 "status": status
             };
 
-            return $http.put(URL + TASK + "?searchBy=ObjectId&searchParam=" + taskId, dataToUpdate);
+            return $http.put(URL + TASK);
+            // return $http.put(URL + TASK + "?searchBy=ObjectId&searchParam=" + taskId, dataToUpdate);
         }
 
         function deleteTask(taskId) {
-            return $http.delete(URL + TASK + "?searchBy=ObjectId&searchParam=" + taskId);
+            return $http.delete(URL + TASK);
         }
 
         return {
             addTask: addTask,
-            getAllTask: getAllTask,
-            updateTaskStatus: updateTaskStatus,
-            updateTaskQuadrant: updateTaskQuadrant,
+            getTask: getTask,
+            updateTask: updateTask,
             deleteTask: deleteTask
         };
     }

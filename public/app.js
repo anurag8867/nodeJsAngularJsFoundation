@@ -1,42 +1,42 @@
-var app = angular.module('app', []);
-app.controller('appController', function ($scope, $http) {
+var app = angular.module('app', ['app']);
+app.controller('appController', function ($scope, $http, apiService) {
 
     $scope.tutorialName = "Angular JS";
     let URI = "http://localhost:3500/";
 
     $scope.post = function () {
-        $http.post(URI + "task")
-            .then(function (data, status, headers, config) {
-                $scope.tutorialName = data;
-            }, function (data, status, headers, config) {
-                $scope.error = status;
-            });
+        apiService.addTask().then(function (data) {
+            $scope.tutorialName = data;
+        }, function (data, status, headers, config) {
+            alert("Task was not added");
+            $scope.taskTitle = "";
+        });
     };
 
     $scope.get = function () {
-        $http.get(URI + "task")
-            .then(function (data, status, headers, config) {
-                $scope.tutorialName = data;
-            }, function (data, status, headers, config) {
-                $scope.error = status;
-            });
+        apiService.getTask().then(function (data) {
+            $scope.tutorialName = data;
+        }, function (data, status, headers, config) {
+            alert("Task was not added");
+            $scope.taskTitle = "";
+        });
     };
 
     $scope.put = function () {
-        $http.put(URI + "task")
-            .then(function (data, status, headers, config) {
-                $scope.tutorialName = data;
-            }, function (data, status, headers, config) {
-                $scope.error = status;
-            });
+        apiService.updateTask().then(function (data) {
+            $scope.tutorialName = data;
+        }, function (data, status, headers, config) {
+            alert("Task was not added");
+            $scope.taskTitle = "";
+        });
     };
 
     $scope.delete = function () {
-        $http.delete(URI + "task")
-            .then(function (data, status, headers, config) {
-                $scope.tutorialName = data;
-            }, function (data, status, headers, config) {
-                $scope.error = status;
-            });
+        apiService.deleteTask().then(function (data) {
+            $scope.tutorialName = data;
+        }, function (data, status, headers, config) {
+            alert("Task was not added");
+            $scope.taskTitle = "";
+        });
     };
 });
