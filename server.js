@@ -6,7 +6,8 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
     port = config.server.PORT,
-taskRepo = require('./dbLayer/repositories/taskRepo');
+taskRepo = require('./dbLayer/repositories/taskRepo'),
+taskService = require('./server/task/taskService');
 
 const MongoClient = require("mongodb").MongoClient;
 const crypto = require("crypto");
@@ -33,19 +34,19 @@ function main() {
     MongoClient.connect(uri, (err, db) => {
 
       app.post('/task', (req, res) => {
-        taskRepo.post(db, {name: "Company Inc", address: "Highway 37"}, req, res);
+        taskService.save(db, req, res);
       });
 
       app.get('/task', (req, res) => {
-        taskRepo.get(db, {}, req, res);
+        taskService.get(db, req, res);
       });
 
       app.put('/task', (req, res) => {
-        taskRepo.put(db,  {address: "Highway 37"} ,{ $set: {name: "Mickey", address: "Canyon 123" } }, req, res);
+        taskService.update(db, req, res);
       });
 
       app.delete('/task', (req, res) => {
-        taskRepo.delete(db,  { address: "Canyon 123" } , req, res);
+        taskService.delete(db, req, res);
       });
 
       app.use(function (req, res) {
